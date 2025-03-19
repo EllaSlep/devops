@@ -1,6 +1,6 @@
 FROM python:3.9-alpine AS builder
 
-WORKDIR /app
+WORKDIR /app/.local
 
 COPY requirements.txt .
 RUN pip install --user --no-cache-dir -r requirements.txt
@@ -9,12 +9,12 @@ COPY . .
 
 FROM python:3.9-alpine
 
-WORKDIR /app
+WORKDIR /app/.local
 
-COPY --from=builder /root/.local /root/.local
+COPY --from=builder /app/.local /app/.local
 COPY --from=builder /app /app
 
-ENV PATH=/root/.local/bin:$PATH
+ENV PATH=/app/.local/bin:$PATH
 
 RUN adduser -D myuser
 USER myuser
