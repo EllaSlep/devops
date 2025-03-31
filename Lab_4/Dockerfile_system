@@ -1,0 +1,8 @@
+FROM python:3.9-alpine AS system
+
+WORKDIR /app
+
+RUN apk add --no-cache \
+    build-base \
+    postgresql-dev \
+    && rm -rf /var/cache/apk/*
