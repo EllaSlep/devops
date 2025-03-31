@@ -2,7 +2,6 @@ FROM python:3.9-alpine
 
 WORKDIR /app
 
-# Копируем только необходимое из build-стадии
 COPY --from=build /app /app
 
 RUN adduser -D myuser && \
